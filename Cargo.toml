@@ -1,6 +1,6 @@
 [package]
 edition = "2021"
-name = "proc_macro_derive_template"
+name = "from_enum"
 version = "0.1.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -8,4 +8,6 @@ version = "0.1.0"
 proc-macro = true
 
 [dependencies]
+quote = {version = "=1.0.28"}
+syn = {version = "=1.0.107"}
 proc_macro_helpers = {path = "../proc_macro_helpers"}
