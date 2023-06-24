@@ -68,7 +68,7 @@ pub fn from_enum(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
                         });
                         let fields_generated_cloned = fields_generated.clone();
                         quote::quote! {
-                            #enum_path_token_stream::#variant_ident { #(#fields_generated),* } => Self::#variant_ident { #(#fields_generated_cloned),* }
+                            #ident_with_serialize_deserialize_token_stream::#variant_ident { #(#fields_generated),* } => Self::#variant_ident { #(#fields_generated_cloned),* }
                         }
                     }
                     syn::Fields::Unnamed(_fields_unnamed) => {
@@ -76,7 +76,7 @@ pub fn from_enum(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
                         // let fields_unnamed_iter = fields_unnamed.unnamed.iter();
                         // let fields_unnamed_iter_cloned = fields_unnamed_iter.clone();
                         // quote::quote! {
-                        //     #enum_path_token_stream::#variant_ident(#(#fields_unnamed_iter),*) => Self::#variant_ident(#(#fields_unnamed_iter_cloned),*)
+                        //     #ident_with_serialize_deserialize_token_stream::#variant_ident(#(#fields_unnamed_iter),*) => Self::#variant_ident(#(#fields_unnamed_iter_cloned),*)
                         // }
                         panic!(
                             "FromEnum {ident} logic for syn::Fields::Unnamed is not implemented yet"
@@ -90,19 +90,23 @@ pub fn from_enum(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
         } else {
             panic!("FromEnum does work only on enums!");
         };
-        quote::quote! {
-            impl std::convert::From<#enum_path_token_stream>
-                for #ident_with_serialize_deserialize_token_stream
+        let variant_gen = quote::quote! {
+            impl std::convert::From<#ident_with_serialize_deserialize_token_stream>
+                for #enum_path_token_stream
             {
                 fn from(
-                    val: #enum_path_token_stream,
+                    val: #ident_with_serialize_deserialize_token_stream,
                 ) -> Self {
                     match val {
                         #(#variants),*
                     }
                 }
             }
-        }
+        };
+        // if enum_path == "" {
+        //     println!("{variant_gen}");
+        // }
+        variant_gen
     });
     let gen = quote::quote! {
         #(#generated)*
