@@ -111,7 +111,9 @@ pub fn from_enum(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
     let gen = quote::quote! {
         #(#generated)*
     };
-    // println!("{gen}");
+    // if ident == "" {
+    //     println!("{gen}");
+    // }
     gen.into()
 }
 
