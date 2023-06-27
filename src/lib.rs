@@ -137,7 +137,7 @@ pub fn from_enum_with_lifetime(input: proc_macro::TokenStream) -> proc_macro::To
             .unwrap_or_else(|_| {
                 panic!("FromEnum {ident} .parse::<proc_macro2::TokenStream>() failed")
             });
-    let attribute_path = "from_enum::from_enum_paths";
+    let attribute_path = "from_enum::from_enum_paths_with_lifetime";
     let option_attribute = ast.attrs.into_iter().find(|attr| {
         let possible_path = {
             let mut stringified_path = quote::ToTokens::to_token_stream(&attr.path).to_string();
@@ -242,4 +242,12 @@ pub fn from_enum_with_lifetime(input: proc_macro::TokenStream) -> proc_macro::To
     //     println!("{gen}");
     // }
     gen.into()
+}
+
+#[proc_macro_attribute]
+pub fn from_enum_paths_with_lifetime(
+    _attr: proc_macro::TokenStream,
+    item: proc_macro::TokenStream,
+) -> proc_macro::TokenStream {
+    item
 }
