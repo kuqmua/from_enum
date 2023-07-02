@@ -8,7 +8,7 @@ pub fn from_enum(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
         ident_with_serialize_deserialize_stringified
             .parse::<proc_macro2::TokenStream>()
             .unwrap_or_else(|_| {
-                panic!("FromEnum {ident} .parse::<proc_macro2::TokenStream>() failed")
+                panic!("FromEnum {ident} {}", proc_macro_helpers::global_variables::hardcode::PARSE_PROC_MACRO2_TOKEN_STREAM_FAILED_MESSAGE)
             });
     let attribute_path = "from_enum::from_enum_paths";
     let option_attribute = ast.attrs.into_iter().find(|attr| {
@@ -54,7 +54,7 @@ pub fn from_enum(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
         let enum_path_token_stream = enum_path
             .parse::<proc_macro2::TokenStream>()
             .unwrap_or_else(|_| {
-                panic!("FromEnum {ident} {enum_path} .parse::<proc_macro2::TokenStream>() failed")
+                panic!("FromEnum {ident} {enum_path} {}", proc_macro_helpers::global_variables::hardcode::PARSE_PROC_MACRO2_TOKEN_STREAM_FAILED_MESSAGE)
             });
         let variants = if let syn::Data::Enum(data_enum) = &ast.data {
             data_enum.variants.iter().map(|variant| {
@@ -132,7 +132,7 @@ pub fn from_enum_with_lifetime(input: proc_macro::TokenStream) -> proc_macro::To
         ident_with_serialize_deserialize_stringified
             .parse::<proc_macro2::TokenStream>()
             .unwrap_or_else(|_| {
-                panic!("FromEnum {ident} .parse::<proc_macro2::TokenStream>() failed")
+                panic!("FromEnum {ident} {}", proc_macro_helpers::global_variables::hardcode::PARSE_PROC_MACRO2_TOKEN_STREAM_FAILED_MESSAGE)
             });
     let attribute_path = "from_enum::from_enum_paths_with_lifetime";
     let option_attribute = ast.attrs.into_iter().find(|attr| {
@@ -178,7 +178,7 @@ pub fn from_enum_with_lifetime(input: proc_macro::TokenStream) -> proc_macro::To
         let enum_path_token_stream = enum_path
             .parse::<proc_macro2::TokenStream>()
             .unwrap_or_else(|_| {
-                panic!("FromEnum {ident} {enum_path} .parse::<proc_macro2::TokenStream>() failed")
+                panic!("FromEnum {ident} {enum_path} {}", proc_macro_helpers::global_variables::hardcode::PARSE_PROC_MACRO2_TOKEN_STREAM_FAILED_MESSAGE)
             });
         let variants = if let syn::Data::Enum(data_enum) = &ast.data {
             data_enum.variants.iter().map(|variant| {
@@ -259,7 +259,7 @@ pub fn from_enum_without_serialize_deserialize(
         ident_with_serialize_deserialize_stringified
             .parse::<proc_macro2::TokenStream>()
             .unwrap_or_else(|_| {
-                panic!("FromEnum {ident} .parse::<proc_macro2::TokenStream>() failed")
+                panic!("FromEnum {ident} {}", proc_macro_helpers::global_variables::hardcode::PARSE_PROC_MACRO2_TOKEN_STREAM_FAILED_MESSAGE)
             });
     let attribute_path = "from_enum::from_enum_paths_without_serialize_deserialize";
     let option_attribute = ast.attrs.into_iter().find(|attr| {
@@ -305,7 +305,7 @@ pub fn from_enum_without_serialize_deserialize(
         let enum_path_token_stream = enum_path
             .parse::<proc_macro2::TokenStream>()
             .unwrap_or_else(|_| {
-                panic!("FromEnum {ident} {enum_path} .parse::<proc_macro2::TokenStream>() failed")
+                panic!("FromEnum {ident} {enum_path} {}", proc_macro_helpers::global_variables::hardcode::PARSE_PROC_MACRO2_TOKEN_STREAM_FAILED_MESSAGE)
             });
         let variants = if let syn::Data::Enum(data_enum) = &ast.data {
             data_enum.variants.iter().map(|variant| {
